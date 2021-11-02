@@ -5,7 +5,6 @@
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
 
-
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
@@ -16,7 +15,8 @@ async function main() {
 
   // We get the contract to deploy
   const MSOT = await hre.ethers.getContractFactory("MSOT");
-  const msot = await hre.upgrades.deployProxy(MSOT, {kind: 'uups'}); 
+  const msot = await MSOT.deploy();
+
   await msot.deployed();
 
   console.log("MSOT deployed to:", msot.address);
